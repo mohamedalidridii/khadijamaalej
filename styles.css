@@ -918,24 +918,57 @@ h3 {
 @media (max-width: 768px) {
   nav,
   .hero-footer {
-    padding: 2rem;
+    padding: 1.5rem;
+  }
+
+  nav {
+    justify-content: space-between;
+  }
+
+  .nav-item {
+    flex: none;
+    gap: 0.9rem;
+  }
+
+  .nav-item a {
+    font-size: 1rem;
+  }
+
+  .nav-item .wordmark {
+    font-size: 1.5rem;
   }
 
   .hero-img-wrapper {
     width: 60%;
   }
 
+  .marquee {
+    top: 45%;
+  }
+
   .hero-copy {
-    width: 85%;
+    width: 90%;
+    bottom: 5rem;
+    gap: 1rem;
+  }
+
+  .hero-copy > p {
+    font-size: 1rem;
+  }
+
+  .hero-callout p {
+    width: auto;
+    max-width: 100%;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-footer p {
+    font-size: 0.85rem;
   }
 
   .section {
     padding: 6rem 1.5rem;
-  }
-
-  .nav-item:first-child {
-    flex-direction: column;
-    gap: 0.25rem;
   }
 
   .page-hero {
@@ -988,5 +1021,24 @@ h3 {
 
   .parallax-band {
     height: 60svh;
+  }
+}
+
+/* Small phones: wordmark moves to the left so the nav fits on one row */
+@media (max-width: 380px) {
+  nav {
+    gap: 0.75rem;
+  }
+
+  .nav-item:nth-child(2) {
+    order: -1;
+  }
+
+  .nav-item {
+    gap: 0.7rem;
+  }
+
+  .nav-item a {
+    font-size: 0.9rem;
   }
 }

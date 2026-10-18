@@ -111,14 +111,24 @@ document.addEventListener("DOMContentLoaded", () => {
     [0.23, 0.17, 0.72, 7],
   ];
 
+  // Phones: a collage above and beside the name, clear of the copy below it
+  const scatterMobile = [
+    [-0.33, -0.3, 0.36, -8],
+    [-0.11, -0.21, 0.32, 6],
+    [0.11, -0.31, 0.34, 5],
+    [0.33, -0.2, 0.38, -6],
+    [-0.38, -0.03, 0.34, -4],
+    [0.38, -0.01, 0.36, 7],
+  ];
+
   const scatterProps = (index) => {
     const isMobile = window.innerWidth <= 768;
-    const [fx, fy, scale, rotation] = scatter[index];
+    const [fx, fy, scale, rotation] = (isMobile ? scatterMobile : scatter)[index];
 
     return {
-      x: fx * window.innerWidth * (isMobile ? 1.1 : 1),
+      x: fx * window.innerWidth,
       y: fy * window.innerHeight,
-      scale: scale * (isMobile ? 0.5 : 1),
+      scale,
       rotation,
     };
   };
@@ -190,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           x: (index) => scatterProps(index).x * 2.2,
           y: (index) => scatterProps(index).y * 2.2 - window.innerHeight * 0.15,
-          rotation: (index) => scatter[index][3] * 2,
+          rotation: (index) => scatterProps(index).rotation * 2,
           ease: "power2.in",
           stagger: 0.04,
         },
