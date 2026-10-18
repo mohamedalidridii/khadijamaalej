@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .to(".page-title .line", { ...revealProps, stagger: 0.1 })
     .to("nav .line", { ...revealProps, stagger: 0.08 }, "<0.1")
+    .from(".menu-toggle", { yPercent: 100, opacity: 0, ...revealProps }, "<")
     .to(".page-intro .line", { ...revealProps, stagger: 0.08 }, "<0.2");
 
   // Project pages only

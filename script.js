@@ -151,9 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tl.to(".marquee-track h1", { ...revealProps }, "<0.6");
   tl.to("nav .line", { ...revealProps, stagger: 0.1 }, "<0.125");
+  tl.from(".menu-toggle", { yPercent: 100, opacity: 0, ...revealProps }, "<");
   tl.to(".hero-copy > p .line", { ...revealProps, stagger: 0.1 }, "<0.125");
   tl.to(".hero-callout p", { ...revealProps, opacity: 1 }, "<0.125");
   tl.to(".hero-footer .line", { ...revealProps }, "<0.125");
+  tl.from(".credit-badge", { xPercent: 100, duration: 1, ease: "power4.out" }, "<0.125");
 
   // Keep the scattered layout in proportion when the window resizes
   window.addEventListener("resize", () => {

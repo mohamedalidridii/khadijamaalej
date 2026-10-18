@@ -14,6 +14,15 @@
     <div class="scroll-progress" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"><span class="cursor-label">View</span></div>
     <div class="work-preview" aria-hidden="true"><img src="/img3.jpg" alt="" /></div>
+    <a
+      class="credit-badge"
+      href="https://www.koyotec.digital"
+      target="_blank"
+      rel="noopener"
+      aria-label="Site by Koyotec"
+    >
+      <span class="credit-mark">K.</span><span class="credit-name">Koyotec</span>
+    </a>
 
     <nav>
       <div class="nav-item">
@@ -26,8 +35,22 @@
       </div>
       <div class="nav-item">
         <a href="/contact.html">Contact</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu">
+          Menu
+        </button>
       </div>
     </nav>
+
+    <div class="menu" id="menu" aria-hidden="true" inert>
+      <ul class="menu-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="/speaking.html">Speaking</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+      <p class="menu-footer">Khadija Maalej · Tunis</p>
+    </div>
 
     <div id="smooth-wrapper">
     <div id="smooth-content">

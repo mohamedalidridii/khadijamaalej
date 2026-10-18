@@ -36,6 +36,53 @@ export const initSite = () => {
   });
   smoother.paused(true);
 
+  /* Mobile menu. Registered before the # link handler so a menu link
+     closes the menu (and unpauses scrolling) before it scrolls. */
+
+  const menu = document.querySelector(".menu");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuTl = gsap
+    .timeline({ paused: true })
+    .set(menu, { visibility: "visible" })
+    .to(menu, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "hop" })
+    .fromTo(
+      ".menu-links a",
+      { yPercent: 100 },
+      { yPercent: 0, duration: 0.8, ease: "power4.out", stagger: 0.06 },
+      "<0.3",
+    )
+    .fromTo(".menu-footer", { opacity: 0 }, { opacity: 0.55, duration: 0.6 }, "<0.2");
+
+  let menuOpen = false;
+  let pausedBeforeMenu = false;
+
+  const setMenu = (open) => {
+    if (open === menuOpen) return;
+    menuOpen = open;
+    menuToggle.textContent = open ? "Close" : "Menu";
+    menuToggle.setAttribute("aria-expanded", open);
+    menu.setAttribute("aria-hidden", !open);
+    menu.inert = !open;
+
+    if (open) {
+      pausedBeforeMenu = smoother.paused();
+      smoother.paused(true);
+      menuTl.play();
+    } else {
+      smoother.paused(pausedBeforeMenu);
+      menuTl.reverse();
+    }
+  };
+
+  menuToggle.addEventListener("click", () => setMenu(!menuOpen));
+  menu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenu(false));
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenu(false);
+  });
+  gsap.matchMedia().add("(min-width: 769px)", () => setMenu(false));
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();

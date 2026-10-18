@@ -53,7 +53,7 @@ nav {
   padding: 3rem;
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
   mix-blend-mode: difference;
 }
 
@@ -700,6 +700,111 @@ h3 {
   }
 }
 
+/* Mobile menu */
+
+.menu-toggle {
+  display: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--light);
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 450;
+  letter-spacing: -1%;
+  cursor: pointer;
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 7rem 1.5rem 2rem;
+  background-color: var(--dark);
+  clip-path: inset(0% 0% 100% 0%);
+  visibility: hidden;
+}
+
+.menu-links {
+  list-style: none;
+}
+
+.menu-links li {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.menu-links a {
+  display: block;
+  padding: 0.5rem 0;
+  color: var(--light);
+  font-size: clamp(2.5rem, 12vw, 4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.menu-footer {
+  margin-top: 2rem;
+  color: var(--light);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+}
+
+/* Koyotec credit badge (home page) */
+
+.credit-badge {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.9rem 0.6rem 1rem;
+  background-color: var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 0;
+  border-radius: 999px 0 0 999px;
+  box-shadow: 0 0.5rem 1.5rem rgba(15, 15, 15, 0.2);
+  z-index: 25;
+  transition: opacity 0.3s ease;
+}
+
+body:has(.menu[aria-hidden="false"]) .credit-badge {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.credit-badge span {
+  color: var(--light);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.credit-mark {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.credit-name {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    margin-left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.credit-badge:hover .credit-name,
+.credit-badge:focus-visible .credit-name {
+  max-width: 6rem;
+  margin-left: 0.4rem;
+}
+
 /* Inner pages */
 
 .btn {
@@ -927,11 +1032,16 @@ h3 {
 
   .nav-item {
     flex: none;
-    gap: 0.9rem;
   }
 
-  .nav-item a {
-    font-size: 1rem;
+  /* Phones: the links live in the full-screen menu instead */
+  .nav-item:first-child,
+  .nav-item:last-child a {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   .nav-item .wordmark {
@@ -1024,21 +1134,3 @@ h3 {
   }
 }
 
-/* Small phones: wordmark moves to the left so the nav fits on one row */
-@media (max-width: 380px) {
-  nav {
-    gap: 0.75rem;
-  }
-
-  .nav-item:nth-child(2) {
-    order: -1;
-  }
-
-  .nav-item {
-    gap: 0.7rem;
-  }
-
-  .nav-item a {
-    font-size: 0.9rem;
-  }
-}
